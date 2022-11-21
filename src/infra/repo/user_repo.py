@@ -9,7 +9,7 @@ class UserRepository:
         """ insert data in user entity
         :param  - name: person name
                 - password: user password
-        : return 
+        :return - tuple with new user inserted   
         """
         InsertData = namedtuple('Users', 'id name, password')
 
