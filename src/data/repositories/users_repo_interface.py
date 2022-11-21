@@ -1,17 +1,17 @@
 from abc import ABC, abstractmethod
 from typing import List
-from src.domain.models import Pets 
+from src.domain.models import Users 
 
-class PetsRepositoryInterface(ABC):
+class UsersRepositoryInterface(ABC):
     
     @abstractmethod
-    def insert_pet(self, name: str, specie: str, age: int, user_id: int) -> Pets:
+    def insert_user(self, name: str, password: str) -> Users:
         """"abstractmethod"""
         
         raise Exception("Method not implemented")
     
     @abstractmethod
-    def select_pet(self, pet_id: int = None, user_id: int = None) -> List[Pets]:
+    def select_user(self, user_id: int = None, name: str = None) -> List[Users]:
         """abstractmethod"""
         
         raise Exception("Method not implemented")
