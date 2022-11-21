@@ -1,6 +1,8 @@
 from faker import Faker
-from .pets_repo import PetsRepository
 from src.infra.config import DBConnectionHandler
+from src.infra.entities.pets import AnimalTypes
+from src.infra.entities import Pets as PetsModel
+from .pets_repo import PetsRepository
 
 
 faker = Faker()
@@ -31,3 +33,36 @@ def test_insert_pet():
     assert new_pet.specie == query_pet.specie
     assert new_pet.age == query_pet.age
     assert new_pet.user_id == query_pet.user_id    
+    
+def test_select_pet():
+    
+    pet_id = faker.random_number(digits=5)
+    name = faker.name()
+    specie = 'dog'
+    age = faker.random_number(digits=1)
+    user_id = faker.random_number(digits=5)
+    
+    mock_specie = AnimalTypes(AnimalTypes.dog)
+    
+    data = PetsModel(id=pet_id,name=name,specie=mock_specie,age=age,user_id=user_id)
+    
+    engine = db_connection_handler.get_engine()
+    engine.execute(
+        "INSERT INTO pets (id, name, specie, age, user_id) VALUES ('{}', '{}', '{}', '{}', '{}');".format(
+            pet_id,
+            name,
+            specie,
+            age,
+            user_id
+        )
+    )
+    
+    query_pet1 = pets_repository.select_pet(pet_id=pet_id)
+    query_pet2 = pets_repository.select_pet(user_id=user_id)
+    query_pet3 = pets_repository.select_pet(pet_id=pet_id, user_id=user_id)
+        
+    assert data in query_pet1
+    assert data in query_pet2
+    assert data in query_pet3
+    
+    engine.execute("DELETE FROM pets WHERE id='{}';".format(pet_id))
