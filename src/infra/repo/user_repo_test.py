@@ -46,3 +46,5 @@ def test_select_user():
     assert data in query_user1
     assert data in query_user2
     assert data in query_user3
+    
+    engine.execute("DELETE FROM users WHERE id='{}';".format(user_id))
