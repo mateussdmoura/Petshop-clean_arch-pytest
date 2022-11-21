@@ -10,4 +10,6 @@ def test_insert_user():
     name = faker.name()
     password = faker.word()
     
-    user_repo.insert_user(name=name,password=password)
+    new_user = user_repo.insert_user(name=name,password=password)
+    
+    print(new_user)
