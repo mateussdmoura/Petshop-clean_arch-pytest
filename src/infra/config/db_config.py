@@ -22,5 +22,5 @@ class DBConnectionHandler:
         self.session = session_maker(bind=engine)
         return self
     
-    def __exit__(self):
+    def __exit__(self, exc_type, exc_value, tb):
         self.session.close()
