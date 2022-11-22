@@ -35,7 +35,7 @@ def test_register_user_usecase_fail():
     register_user = RegisterUserUseCase(users_repo)
     
     attributes = {
-        "name": faker.name(),
+        "name": faker.random_number(digits=5),
         "password": faker.word()
     }
     
@@ -45,10 +45,9 @@ def test_register_user_usecase_fail():
     )
     
     # Testing inputs
-    assert users_repo.insert_user_params["name"] == attributes["name"]
-    assert users_repo.insert_user_params["password"] == attributes["password"]
+    assert users_repo.insert_user_params == {}
     
     # Testing Outputs
-    assert response["Success"] is True
-    assert response["Data"]
+    assert response["Success"] is False
+    assert response["Data"] is None
     
