@@ -1,16 +1,54 @@
 from faker import Faker
 from .register import RegisterUserUseCase
+from src.infra.test import UserRepositorySpy
 
 faker = Faker()
 
 def test_register_user_usecase():
-    """Should be able to register new user to Users table"""
+    """Testin registry methods"""
     
-    name = faker.name()
-    password = faker.word()
+    users_repo = UserRepositorySpy()
+    register_user = RegisterUserUseCase(users_repo)
     
-    sut = RegisterUserUseCase(
-        name=name,
-        password=password
+    attributes = {
+        "name": faker.name(),
+        "password": faker.word()
+    }
+    
+    response = register_user.execute(
+        name=attributes["name"],
+        password=attributes["password"]
     )
+    
+    # Testing inputs
+    assert users_repo.insert_user_params["name"] == attributes["name"]
+    assert users_repo.insert_user_params["password"] == attributes["password"]
+    
+    # Testing Outputs
+    assert response["Success"] is True
+    assert response["Data"]
+
+def test_register_user_usecase_fail():
+    """Testin registry methods in fail"""
+    
+    users_repo = UserRepositorySpy()
+    register_user = RegisterUserUseCase(users_repo)
+    
+    attributes = {
+        "name": faker.name(),
+        "password": faker.word()
+    }
+    
+    response = register_user.execute(
+        name=attributes["name"],
+        password=attributes["password"]
+    )
+    
+    # Testing inputs
+    assert users_repo.insert_user_params["name"] == attributes["name"]
+    assert users_repo.insert_user_params["password"] == attributes["password"]
+    
+    # Testing Outputs
+    assert response["Success"] is True
+    assert response["Data"]
     
