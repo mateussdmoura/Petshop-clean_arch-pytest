@@ -1,6 +1,7 @@
 from typing import Type
 from src.domain.use_cases.find_user import FindUserInterface
 from src.presenters.helpers import HttpRequest, HttpResponse
+from src.presenters.errors import HttpErrors
 
 
 class FindUserController:
@@ -36,11 +37,17 @@ class FindUserController:
                     name=user_name,
                 )
             else:
-                return {
+                response = {
                     "Success": False,
                     "Data": None
                 }
             
             if response["Success"] is False:
-                pass
-        #return response
+                http_error = HttpErrors.error_422()
+                return HttpResponse(
+                    status_code=http_error["status_code"], body=http_error["body"]
+                )
+            return HttpResponse(
+                status_code=200, body=response["Data"]
+            )
+
