@@ -31,3 +31,8 @@ def test_register_pet_handle():
     assert register_pet_usecase.register_params["specie"] == attributes["specie"]
     assert register_pet_usecase.register_params["age"] == attributes["age"]
     assert register_pet_usecase.register_params["user_information"] == attributes["user_information"]
+    
+    # Testing outputs
+    assert response.status_code==200
+    assert "error" not in response.body
+    
