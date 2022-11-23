@@ -12,3 +12,13 @@ class HttpErrors:
             }
         }
     
+    @staticmethod
+    def error_400():
+        """HTTP 400"""
+        
+        return {
+            "status_code": 400,
+            "body": {
+                "error": "Bad Request"
+            }
+        }

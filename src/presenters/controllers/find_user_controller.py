@@ -43,6 +43,8 @@ class FindUserController:
                 }
             
             if response["Success"] is False:
+                # HTTP ERROR 422
+                
                 http_error = HttpErrors.error_422()
                 return HttpResponse(
                     status_code=http_error["status_code"], body=http_error["body"]
@@ -51,3 +53,4 @@ class FindUserController:
                 status_code=200, body=response["Data"]
             )
 
+        # if no query, HTTP ERROR 400 (bad request)
