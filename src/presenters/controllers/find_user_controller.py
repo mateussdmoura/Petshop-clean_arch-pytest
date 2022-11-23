@@ -40,4 +40,7 @@ class FindUserController:
                     "Success": False,
                     "Data": None
                 }
-        return response
+            
+            if response["Success"] is False:
+                pass
+        #return response
