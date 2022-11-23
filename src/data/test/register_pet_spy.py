@@ -1,5 +1,5 @@
 from typing import Dict, List, Type
-from src.domain.models.pets import Pets
+from src.domain.models import Users, Pets
 from src.domain.test import mock_pets, mock_users
 
 
@@ -10,7 +10,7 @@ class RegisterPetSpy:
         self.find_user = find_user
         self.register_params = {}
     
-    def register(
+    def execute(
         self, name: str, specie: str, user_information: Dict[int, str], age: int = None
         ) -> Dict[bool, Pets]:
         """Registry Pet"""
@@ -37,7 +37,7 @@ class RegisterPetSpy:
             "Success": checker, "Data": response 
         }
         
-    def __find_user_info(self, user_information: Dict[int,str]) -> Dict[bool, List[Users]]:
+    def __find_user_information(self, user_information: Dict[int,str]) -> Dict[bool, List[Users]]:
         """Check user's info and select user"""
         
         user_found = None

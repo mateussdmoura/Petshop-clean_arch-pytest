@@ -32,7 +32,7 @@ class RegisterPetController:
                 
                     response = self.register_pet_usecase.execute(
                         name=name,
-                        specie=specie
+                        specie=specie,
                         user_information=user_information,
                         age=age
                     )
