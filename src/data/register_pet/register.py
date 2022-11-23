@@ -3,6 +3,7 @@ from src.domain.use_cases import RegisterPetInterface
 from src.data.find_user import FindUser
 from src.domain.models import Pets, Users
 from src.data.repositories import PetsRepositoryInterface as PetsRepository
+from src.infra.entities.pets import AnimalTypes
 
 class PetRegister(RegisterPetInterface):
     """Class to define use case: Pet Register"""
@@ -22,7 +23,7 @@ class PetRegister(RegisterPetInterface):
         
         response = None
         
-        validate_entry = isinstance(name,str) and isinstance(specie,str)
+        validate_entry = isinstance(name,str) and isinstance(specie, str)
         user = self.__find_user_info(user_information)
         checker = validate_entry and user["Success"]
         
