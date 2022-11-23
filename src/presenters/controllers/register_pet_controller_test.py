@@ -27,7 +27,7 @@ def test_register_pet_handle():
     )
     
     # Testing inputs
-    register_pet_usecase.register_params["name"] == attributes["name"]
-    register_pet_usecase.register_params["specie"] == attributes["specie"]
-    register_pet_usecase.register_params["age"] == attributes["age"]
-    register_pet_usecase.register_params["user_information"] == attributes["user_information"]
+    assert register_pet_usecase.register_params["name"] == attributes["name"]
+    assert register_pet_usecase.register_params["specie"] == attributes["specie"]
+    assert register_pet_usecase.register_params["age"] == attributes["age"]
+    assert register_pet_usecase.register_params["user_information"] == attributes["user_information"]
