@@ -1,12 +1,12 @@
 from typing import Type, Dict, List
 from src.domain.models import Users
 from src.domain.test import mock_users
-from src.domain.use_cases import FindUserInterface 
+from src.data.repositories.users_repo_interface import UsersRepositoryInterface 
 
 class FindUserSpy:
     """Class to define usecase: Select User"""
     
-    def __init__(self, user_repo: Type[FindUserInterface]) -> None:
+    def __init__(self, user_repo: Type[UsersRepositoryInterface]) -> None:
         self.user_repo = user_repo
         self.by_id_param = {}
         self.by_name_param = {}
