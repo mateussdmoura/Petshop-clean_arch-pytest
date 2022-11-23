@@ -12,7 +12,13 @@ class PetRegister(RegisterPetInterface):
         self.find_user = find_user
         
     def execute(self, name: str, specie: str, user_information: Dict[int, str], age: int = None) -> Dict[bool, Pets]:
-        """Register pet"""
+        """Register pet
+        :params - name: pet's name
+                - specie: Enum pet's specie
+                - user_information: Dict with user_id and/or user_name
+                - age: Pet's age, not mandatory
+        :return - Dict with Success status and Pets data
+        """
         
         response = None
         
@@ -30,6 +36,10 @@ class PetRegister(RegisterPetInterface):
         
         
     def __find_user_info(self, user_information: Dict[int,str]) -> Dict[bool, List[Users]]:
+        """Check user's info and select user
+        :param  - user_information: Dict with user_id and/or user_name
+        :return - Dict with response of find use case
+        """
         
         user_found = None
         user_params = user_information.keys()
